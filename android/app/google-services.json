@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:770667900179:android:9150f1147779b4048dbee6",
+        "mobilesdk_app_id": "1:770667900179:android:6cec6cbc2b97b5c88dbee6",
         "android_client_info": {
-          "package_name": "de.mgm.einkaufapp"
+          "package_name": "de.mgm12.einkaufsapp"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "770667900179-cfq0f8o1i06ldp2jui7tpupkntdcr8r1.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "de.mgm.einkaufsapp"
+                "bundle_id": "de.mgm12.einkaufsapp"
               }
             }
           ]

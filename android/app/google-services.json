@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "770667900179",
+    "project_id": "einkaufsapp-mgm12",
+    "storage_bucket": "einkaufsapp-mgm12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770667900179:android:9150f1147779b4048dbee6",
+        "android_client_info": {
+          "package_name": "de.mgm.einkaufapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "770667900179-gom9n0f1l5sqekbue72hu30sgb152dgi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCboJu3oyjxfjHwygU00JKXCiWjPmV6kDs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "770667900179-gom9n0f1l5sqekbue72hu30sgb152dgi.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "770667900179-cfq0f8o1i06ldp2jui7tpupkntdcr8r1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "de.mgm.einkaufsapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

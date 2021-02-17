@@ -33,8 +33,8 @@ class AuthService {
     var user = _auth.currentUser;
   }
 
-  void signOut(){
-    _auth.signOut();
+  Future<void> signOut(){
+    return _auth.signOut();
   }
 
 }

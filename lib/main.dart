@@ -1,7 +1,11 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'auth.dart';
+import 'services/services.dart';
+import 'screens/screens.dart';
+import 'shared/shared.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +24,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Einkaufsapp',
+       // Firebase Analytics
+        navigatorObservers: [
+          FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
+        ],
+      routes: {
+        '/home': (context) => MyHomePage(),
+        '/profile': (context) => ProfileScreen()
+      },
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -61,14 +73,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-int _selectedIndex = 0;
-
-void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -83,16 +88,7 @@ void _onItemTapped(int index) {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Shopping List'),
-            BottomNavigationBarItem(icon: Icon(Icons.food_bank), label: 'Food')
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: Colors.amberAccent,
-          onTap: _onItemTapped,
-        ),
+      bottomNavigationBar: AppBottomNav(),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -116,36 +112,9 @@ void _onItemTapped(int index) {
             Text(
               'You have pushed the button this many times:',
             ),
-            LoginButton()
           ],
         ),
       ),// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
-
-  class LoginButton extends StatelessWidget {
-
-    @override
-    Widget build(BuildContext context){
-      return StreamBuilder(builder: (context, snapshot) {
-        if (snapshot.hasData) {
-            return MaterialButton(
-              onPressed: () => authService.signOut(),
-              color: Colors.red,
-              textColor: Colors.white,
-              child: Text('Signout'),
-            );
-          } else {
-            return MaterialButton(
-              onPressed: () => authService.signInWithGoogle(),
-              color: Colors.white,
-              textColor: Colors.black,
-              child: Text('Login with Google'),
-            );
-          }
-      },
-      stream: authService.user,
-      );
-    }
-  }

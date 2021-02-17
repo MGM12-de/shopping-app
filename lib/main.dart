@@ -1,6 +1,7 @@
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'auth.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -115,9 +116,36 @@ void _onItemTapped(int index) {
             Text(
               'You have pushed the button this many times:',
             ),
+            LoginButton()
           ],
         ),
       ),// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
+
+  class LoginButton extends StatelessWidget {
+
+    @override
+    Widget build(BuildContext context){
+      return StreamBuilder(builder: (context, snapshot) {
+        if (snapshot.hasData) {
+            return MaterialButton(
+              onPressed: () => authService.signOut(),
+              color: Colors.red,
+              textColor: Colors.white,
+              child: Text('Signout'),
+            );
+          } else {
+            return MaterialButton(
+              onPressed: () => authService.signInWithGoogle(),
+              color: Colors.white,
+              textColor: Colors.black,
+              child: Text('Login with Google'),
+            );
+          }
+      },
+      stream: authService.user,
+      );
+    }
+  }

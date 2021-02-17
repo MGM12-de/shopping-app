@@ -33,7 +33,7 @@ class LoginScreenState extends State<LoginScreen> {
             ),
             Text(
               'Login to Start',
-              style: Theme.of(context).textTheme.headline1,
+              style: Theme.of(context).textTheme.headline6,
               textAlign: TextAlign.center,
             ),
             Text('Test'),
@@ -41,7 +41,8 @@ class LoginScreenState extends State<LoginScreen> {
               text: 'LOGIN WITH GOOGLE',
               icon: Icons.login,
               loginMethod: auth.signInWithGoogle
-            )
+            ),
+            LoginButton(text: 'Continue as Guest', loginMethod: auth.anonLogin)
           ],
         ),
       ),

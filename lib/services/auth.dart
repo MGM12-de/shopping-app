@@ -3,11 +3,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  Stream<User> user;
-
-  AuthService() {
-    user = _auth.authStateChanges();
-  }
+  Stream<User> get user => _auth.authStateChanges();
 
   Future<UserCredential> signInWithGoogle() async{
     final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
@@ -20,17 +16,27 @@ class AuthService {
       accessToken: googleAuth.accessToken, 
       idToken: googleAuth.idToken
     );
-    updateUserData();
+    UserCredential result = await _auth.signInWithCredential(credential);
+    User user = result.user;
+    updateUserData(user);
     // return User 
-    return await _auth.signInWithCredential(credential);
+    return result;
+  }
+
+    /// Anonymous Firebase login
+  Future<User> anonLogin() async {
+    UserCredential result = await _auth.signInAnonymously();
+    User user = result.user;
+
+    updateUserData(user);
+    return user;
   }
 
   Future<User> getUser() async {
     return _auth.currentUser;
   }
 
-  void updateUserData() async {
-    var user = _auth.currentUser;
+  void updateUserData(User user) async {
   }
 
   Future<void> signOut(){

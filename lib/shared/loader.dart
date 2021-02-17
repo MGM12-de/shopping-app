@@ -15,7 +15,9 @@ class LoadingScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Loading'),
+      ),
       body: Center(
         child: Loader(),
       ),

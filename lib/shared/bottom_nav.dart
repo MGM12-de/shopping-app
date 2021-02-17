@@ -5,12 +5,12 @@ class AppBottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Shopping List'),
-            BottomNavigationBarItem(icon: Icon(Icons.food_bank), label: 'Food'),
-            BottomNavigationBarItem(icon: Icon(Icons.supervised_user_circle), label: 'Profile')
+            BottomNavigationBarItem(icon: Icon(Icons.home, color: Theme.of(context).accentColor), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.shopping_cart, color: Theme.of(context).accentColor), label: 'Shopping List'),
+            BottomNavigationBarItem(icon: Icon(Icons.food_bank, color: Theme.of(context).accentColor,), label: 'Fridge'),
+            BottomNavigationBarItem(icon: Icon(Icons.supervised_user_circle, color: Theme.of(context).accentColor), label: 'Profile')
       ].toList(),
-      fixedColor: Colors.deepOrangeAccent,
+      fixedColor: Theme.of(context).accentColor,
       onTap: (int idx) {
         switch (idx) {
           case 0:
@@ -20,7 +20,7 @@ class AppBottomNav extends StatelessWidget {
             // Navigator.pushNamed(context, '/about');
             break;
           case 2:
-            // Navigator.pushNamed(context, '/profile');
+            Navigator.pushNamed(context, '/fridge');
             break;
           case 3: 
             Navigator.pushNamed(context, '/profile');

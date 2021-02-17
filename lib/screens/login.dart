@@ -27,6 +27,8 @@ class LoginScreenState extends State<LoginScreen> {
         padding:  EdgeInsets.all(30),
         decoration: BoxDecoration(),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             FlutterLogo(
               size: 150,
@@ -36,11 +38,11 @@ class LoginScreenState extends State<LoginScreen> {
               style: Theme.of(context).textTheme.headline6,
               textAlign: TextAlign.center,
             ),
-            Text('Test'),
+            Text('For the best experience please login'),
             LoginButton(
               text: 'LOGIN WITH GOOGLE',
               icon: Icons.login,
-              loginMethod: auth.signInWithGoogle
+              loginMethod: auth.signInWithGoogle,
             ),
             LoginButton(text: 'Continue as Guest', loginMethod: auth.anonLogin)
           ],
@@ -53,11 +55,12 @@ class LoginScreenState extends State<LoginScreen> {
 
 class LoginButton extends StatelessWidget {
   final IconData icon;
+  final Color color;
   final String text;
   final Function loginMethod;
 
 
-  const LoginButton({this.text, this.icon, this.loginMethod});
+  const LoginButton({this.text, this.icon, this.color, this.loginMethod});
 
   @override
   Widget build(BuildContext context){
@@ -71,6 +74,7 @@ class LoginButton extends StatelessWidget {
           textAlign: TextAlign.center,
           ),
         ),
+        color: color,
         onPressed: () async{
           var user = await loginMethod();
           if(user != null){

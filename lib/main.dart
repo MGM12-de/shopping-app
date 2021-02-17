@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => LoginScreen(),
           '/home': (context) => MyHomePage(),
+          '/fridge': (context) => FridgeScreen(),
           '/profile': (context) => ProfileScreen()
         },
         theme: ThemeData(

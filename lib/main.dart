@@ -89,7 +89,7 @@ void _onItemTapped(int index) {
             BottomNavigationBarItem(icon: Icon(Icons.food_bank), label: 'Food')
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor: Colors.amber,
+          selectedItemColor: Colors.amberAccent,
           onTap: _onItemTapped,
         ),
       body: Center(

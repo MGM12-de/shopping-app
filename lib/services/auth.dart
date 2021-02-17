@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
+
   Stream<User> get user => _auth.authStateChanges();
 
   Future<UserCredential> signInWithGoogle() async{
@@ -37,6 +40,8 @@ class AuthService {
   }
 
   void updateUserData(User user) async {
+    DocumentReference reportRef = _db.collection('userInfo').doc(user.uid);
+    return reportRef.set({'uid': user.uid, 'lastActivity': DateTime.now()}, SetOptions(merge: true));
   }
 
   Future<void> signOut(){

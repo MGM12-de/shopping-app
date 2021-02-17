@@ -4,15 +4,17 @@ class Fridge {
   String fridgeName;
   bool defaultFridge;
   List<FridgeUser> users;
+  String createdBy;
 
-  Fridge({this.owner, this.fridgeName, this.defaultFridge, this.users});
+  Fridge({this.owner, this.fridgeName, this.defaultFridge, this.users, this.createdBy});
 
   factory Fridge.fromMap(Map data){
     return Fridge(
       fridgeName: data['fridgeName'] ?? '',
       owner: data['uid'], 
       defaultFridge: data['defaultFridge'] ?? true,
-      users: data['users']
+      users: data['users'],
+      createdBy: data['createdBy']
     );
   }
 }

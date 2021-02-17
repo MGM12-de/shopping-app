@@ -18,8 +18,23 @@ class ProfileScreen extends StatelessWidget {
         ),
         body: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              if(user.photoURL != null)
+              Container(
+                width: 100,
+                height: 100,
+                margin: EdgeInsets.only(top: 50),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: NetworkImage(user.photoURL)
+                  )
+                ),
+              ),
               Text(user.email ?? '', style: Theme.of(context).textTheme.headline6),
+              Spacer(),
               FlatButton(
                 child: Text('logout'), 
                 color: Colors.red, 
@@ -28,6 +43,7 @@ class ProfileScreen extends StatelessWidget {
                   Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
                 },
               ),
+              Spacer()
             ]
           )
         )

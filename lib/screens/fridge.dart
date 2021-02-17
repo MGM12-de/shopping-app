@@ -7,6 +7,18 @@ class FridgeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Fridge'),
       ),
+      body: Center(
+        child: Column(
+          children: [
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+              onPressed: () async {  },
+              child: Icon(Icons.add),
+              backgroundColor: Theme.of(context).accentColor,
+              
+            ),
     );
   }
 }

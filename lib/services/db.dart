@@ -5,10 +5,11 @@ import 'globals.dart';
 class Document<T> {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   final String path;
+  final String id;
   DocumentReference ref;
 
-  Document({ this.path }){
-    ref = _db.doc(path);
+  Document({ this.path, this.id }){
+    ref = _db.doc('$path/$id');
   }
 
   Future<T> getData() {

@@ -41,7 +41,13 @@ class AuthService {
 
   void updateUserData(User user) async {
     DocumentReference reportRef = _db.collection('userInfo').doc(user.uid);
+    createInitialFridge(user);
     return reportRef.set({'uid': user.uid, 'lastActivity': DateTime.now()}, SetOptions(merge: true));
+  }
+
+  void createInitialFridge(User user) async{
+     DocumentReference fridgeRef = _db.collection('fridge').doc(user.uid);
+     return fridgeRef.set({'createdBy': user.uid}, SetOptions(merge: true));
   }
 
   Future<void> signOut(){

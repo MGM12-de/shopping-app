@@ -8,8 +8,4 @@ class Global {
   static final Map models = {
     Fridge: (data) => Fridge.fromMap(data)
   };
-
-
-  // Firestore References 
-  static final Collection<Fridge> fridgeRef = Collection<Fridge>(path: 'fridge');
 } 

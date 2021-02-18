@@ -1,16 +1,19 @@
 import 'package:einkaufsapp/services/services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 import 'package:einkaufsapp/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FridgeScreen extends StatelessWidget {
 
-  final Fridge fridge = new Fridge();
-
   @override
   Widget build(BuildContext context){
+    User user = Provider.of<User>(context);
+    Document<Fridge> fridgeRef = Document<Fridge>(path: 'fridge', id: user.uid);
+    
     return FutureBuilder(
-      future: Global.fridgeRef.getData(),
+      future: fridgeRef.getData(),
       builder: (BuildContext context, AsyncSnapshot snap){
         if(snap.hasData){
           return Scaffold(

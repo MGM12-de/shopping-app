@@ -134,7 +134,7 @@ class FridgeScreen extends StatelessWidget {
     print(foods);
     if(foods != null){
       return ListView(
-                children: foods.map((e) => FoodItem(food: e)).toList()
+                children: foods.map((e) => FoodItem(key: Key(e.hashCode.toString()), food: e, fridgeRef: fridgeRef,)).toList()
               );
     } else {
       return Text("no Data");
@@ -143,7 +143,8 @@ class FridgeScreen extends StatelessWidget {
 }
 class FoodItem extends StatelessWidget{
   final Food food;
-  const FoodItem({Key key, this.food}) : super(key: key);
+  final Document<Fridge> fridgeRef;
+  const FoodItem({Key key, this.food, this.fridgeRef}) : super(key: key);
 
   @override
   Widget build(BuildContext context){
@@ -152,9 +153,16 @@ class FoodItem extends StatelessWidget{
       child: Card(
         color: Theme.of(context).accentColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-        child: ListTile(
-          title: Text(food.name),
-          leading: Icon(icon),
+        child: Dismissible(
+          key: key, 
+           onDismissed: (direction) {
+              // Todo Delete Entry
+              // fridgeRef.ref.update({['food.' + key.toString]: FieldValue.delete()});
+          },
+          child:  ListTile(
+            title: Text(food.name),
+            leading: Icon(icon),
+          ),
         ),
       ),
     );

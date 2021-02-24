@@ -20,6 +20,8 @@ class _ProductScanState extends State<ProductScanScreen> {
   }
 
   Future<void> scanBarcodeNormal() async {
+    Locale myLocale = Localizations.localeOf(context);
+    print(myLocale.languageCode);
     String barcodeScanRes;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
@@ -37,7 +39,7 @@ class _ProductScanState extends State<ProductScanScreen> {
 
     setState(() {
       _scanBarcode = barcodeScanRes;
-      futureProduct = Product.fetchProduct(_scanBarcode);
+      futureProduct = Product.fetchProduct(myLocale, _scanBarcode);
     });
   }
 
@@ -52,7 +54,7 @@ class _ProductScanState extends State<ProductScanScreen> {
               future: futureProduct,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Text(snapshot.data.barCode);
+                  return ProductDetail(product: snapshot.data);
                 } else if (snapshot.hasError) {
                   return Text("${snapshot.error}");
                 }
@@ -69,6 +71,55 @@ class _ProductScanState extends State<ProductScanScreen> {
         },
         child: Icon(FontAwesomeIcons.barcode),
         backgroundColor: Theme.of(context).accentColor,
+      ),
+    );
+  }
+}
+
+class ProductDetail extends StatelessWidget {
+  final Product product;
+  const ProductDetail({this.product}) : super();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Card(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            ListTile(
+              leading: Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        image: NetworkImage(product.pictureUrl))),
+              ),
+              title: Text(product.name ?? ""),
+              subtitle: Text(product.brand),
+            ),
+            Row(
+              children: [
+                Icon(FontAwesomeIcons.barcode),
+                Text(" "),
+                Text(product.barCode),
+              ],
+            ),
+            Row(
+              children: [
+                Text("Zutaten", style: Theme.of(context).textTheme.headline6),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Flexible(child: Text(product.ingredients ?? "")),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

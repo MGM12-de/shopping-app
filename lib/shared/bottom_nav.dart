@@ -40,7 +40,7 @@ class AppBottomNav extends StatelessWidget {
             // Navigator.pushNamed(context, '/about');
             break;
           case 2:
-            // Navigator.pushNamed(context, '/scanProdukt');
+            Navigator.pushNamed(context, '/productScan');
             break;
           case 3:
             Navigator.pushNamed(context, '/fridge');

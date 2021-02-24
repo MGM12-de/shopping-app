@@ -12,8 +12,7 @@ import 'shared/shared.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await FirebaseCrashlytics.instance
-        .setCrashlyticsCollectionEnabled(true);
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
 
   // Pass all uncaught errors from the framework to Crashlytics.
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
@@ -25,29 +24,27 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        StreamProvider<User>.value(value: AuthService().user)
-      ],
-      child: MaterialApp(
-        title: 'Einkaufsapp',
-        // Firebase Analytics
+        providers: [StreamProvider<User>.value(value: AuthService().user)],
+        child: MaterialApp(
+          title: 'Einkaufsapp',
+          // Firebase Analytics
           navigatorObservers: [
             FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
           ],
-        routes: {
-          '/': (context) => LoginScreen(),
-          '/home': (context) => MyHomePage(),
-          '/fridge': (context) => FridgeScreen(),
-          '/profile': (context) => ProfileScreen()
-        },
-        theme: ThemeData(
-          primaryColor: Colors.black,
-          brightness: Brightness.dark,
-          accentColor: Colors.amber,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-      )
-    );
+          routes: {
+            '/': (context) => LoginScreen(),
+            '/home': (context) => MyHomePage(),
+            '/fridge': (context) => FridgeScreen(),
+            '/profile': (context) => ProfileScreen(),
+            '/productScan': (context) => ProductScanScreen(),
+          },
+          theme: ThemeData(
+            primaryColor: Colors.black,
+            brightness: Brightness.dark,
+            accentColor: Colors.amber,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+        ));
   }
 }
 
@@ -57,11 +54,9 @@ class MyHomePage extends StatefulWidget {
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
-
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

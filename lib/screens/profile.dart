@@ -33,9 +33,9 @@ class ProfileScreen extends StatelessWidget {
                 Text(user.email ?? '',
                     style: Theme.of(context).textTheme.headline6),
                 Spacer(),
-                FlatButton(
+                TextButton(
                   child: Text('logout'),
-                  color: Colors.red,
+                  style: TextButton.styleFrom(primary: Colors.red),
                   onPressed: () async {
                     await auth.signOut();
                     Navigator.of(context)

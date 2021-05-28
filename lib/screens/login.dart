@@ -8,23 +8,20 @@ class LoginScreen extends StatefulWidget {
 class LoginScreenState extends State<LoginScreen> {
   AuthService auth = AuthService();
 
-
   @override
-  void initState(){
+  void initState() {
     super.initState();
 
     auth.getUser().then((user) => {
-      if( user != null){
-        Navigator.pushReplacementNamed(context, '/home')
-      }
-    });
+          if (user != null) {Navigator.pushReplacementNamed(context, '/home')}
+        });
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding:  EdgeInsets.all(30),
+        padding: EdgeInsets.all(30),
         decoration: BoxDecoration(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -52,37 +49,35 @@ class LoginScreenState extends State<LoginScreen> {
   }
 }
 
-
 class LoginButton extends StatelessWidget {
   final IconData icon;
   final Color color;
   final String text;
   final Function loginMethod;
 
-
   const LoginButton({this.text, this.icon, this.color, this.loginMethod});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 10),
-      child: FlatButton.icon(
-        padding: EdgeInsets.all(30),
+      child: TextButton.icon(
         icon: Icon(icon),
         label: Expanded(
-          child: Text('$text', 
-          textAlign: TextAlign.center,
+          child: Text(
+            '$text',
+            textAlign: TextAlign.center,
           ),
         ),
-        color: color,
-        onPressed: () async{
+        style:
+            TextButton.styleFrom(primary: color, padding: EdgeInsets.all(30)),
+        onPressed: () async {
           var user = await loginMethod();
-          if(user != null){
+          if (user != null) {
             Navigator.pushReplacementNamed(context, '/home');
           }
         },
       ),
     );
   }
-  
 }

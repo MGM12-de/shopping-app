@@ -26,25 +26,25 @@ dependencies:
   flutter_localizations: 
     sdk: flutter        
   # Add the dependency for the Firebase Core Flutter SDK
-  firebase_core: "0.7.0"
+  firebase_core: ^1.2.0
    # Add the dependency for the FlutterFire plugin 
-  firebase_analytics: ^7.0.1
-  firebase_crashlytics: ^0.4.0+1
-  firebase_performance: ^0.5.0+1
-  cloud_firestore: "^0.16.0"
-  google_sign_in: "^4.5.1"
-  rxdart: ^0.25.0
-  provider: ^4.3.3
-  font_awesome_flutter: ^8.11.0
-  material_design_icons_flutter: 4.0.5855
-  flutter_iconpicker: ^2.2.2
-  http: ^0.12.2
-  flutter_barcode_scanner: ^1.0.2
+  firebase_analytics: ^8.1.0
+  firebase_crashlytics: ^2.0.4
+  firebase_performance: ^0.7.0+3
+  cloud_firestore: ^2.2.0
+  google_sign_in: ^5.0.4
+  rxdart: ^0.27.0
+  provider: ^5.0.0
+  font_awesome_flutter: ^9.0.0
+  material_design_icons_flutter: ^4.0.5955
+  flutter_iconpicker: ^3.0.2
+  http: ^0.13.3
+  flutter_barcode_scanner: ^2.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
-  firebase_auth: ^0.6.2+1
+  firebase_auth: ^1.2.0
 
 dev_dependencies:
   flutter_test:

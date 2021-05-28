@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:einkaufsapp/services/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_iconpicker/flutter_iconpicker.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:einkaufsapp/shared/shared.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +45,7 @@ class FridgeScreen extends StatelessWidget {
               ),
             ),
             actions: [
-              FlatButton(
+              TextButton(
                 child: Text("Save"),
                 onPressed: () {
                   foodListItem = new Food(

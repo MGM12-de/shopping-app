@@ -25,7 +25,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [StreamProvider<User>.value(value: AuthService().user)],
+        providers: [
+          StreamProvider<FirebaseUser>.value(value: AuthService().user)
+        ],
         child: MaterialApp(
           localizationsDelegates: [
             GlobalMaterialLocalizations.delegate,

@@ -6,54 +6,50 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  Stream<User> get user => _auth.authStateChanges();
+  Stream<FirebaseUser> get user => _auth.onAuthStateChanged;
 
-  Future<UserCredential> signInWithGoogle() async{
+  Future<FirebaseUser> signInWithGoogle() async {
     final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
 
     // obtain auth details
-    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
 
     // create new credentials
-    final GoogleAuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken, 
-      idToken: googleAuth.idToken
-    );
-    UserCredential result = await _auth.signInWithCredential(credential);
-    User user = result.user;
-    updateUserData(user);
-    // return User 
+    FirebaseUser result = await _auth.signInWithGoogle(
+        idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
+    updateUserData(result);
+    // return User
     return result;
   }
 
-    /// Anonymous Firebase login
-  Future<User> anonLogin() async {
-    UserCredential result = await _auth.signInAnonymously();
-    User user = result.user;
+  /// Anonymous Firebase login
+  Future<FirebaseUser> anonLogin() async {
+    FirebaseUser result = await _auth.signInAnonymously();
 
-    updateUserData(user);
-    return user;
+    updateUserData(result);
+    return result;
   }
 
-  Future<User> getUser() async {
-    return _auth.currentUser;
+  Future<FirebaseUser> getUser() async {
+    return _auth.currentUser();
   }
 
-  void updateUserData(User user) async {
+  void updateUserData(FirebaseUser user) async {
     DocumentReference reportRef = _db.collection('userInfo').doc(user.uid);
     createInitialFridge(user);
-    return reportRef.set({'uid': user.uid, 'lastActivity': DateTime.now()}, SetOptions(merge: true));
+    return reportRef.set({'uid': user.uid, 'lastActivity': DateTime.now()},
+        SetOptions(merge: true));
   }
 
-  void createInitialFridge(User user) async{
-     DocumentReference fridgeRef = _db.collection('fridge').doc(user.uid);
-     return fridgeRef.set({'createdBy': user.uid}, SetOptions(merge: true));
+  void createInitialFridge(FirebaseUser user) async {
+    DocumentReference fridgeRef = _db.collection('fridge').doc(user.uid);
+    return fridgeRef.set({'createdBy': user.uid}, SetOptions(merge: true));
   }
 
-  Future<void> signOut(){
+  Future<void> signOut() {
     return _auth.signOut();
   }
-
 }
 
 final AuthService authService = AuthService();

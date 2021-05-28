@@ -34,7 +34,7 @@ class FridgeScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         Icon(_icon),
-                        RaisedButton(
+                        ElevatedButton(
                           onPressed: () => {_pickIcon(context)},
                           child: Text("Select an Icon"),
                         )
@@ -53,7 +53,7 @@ class FridgeScreen extends StatelessWidget {
                       iconID: _icon.codePoint,
                       iconFontFamily: _icon.fontFamily,
                       iconFontPackage: _icon.fontPackage);
-                  List<Map> test = new List<Map>();
+                  List<Map> test = new List<Map>.empty();
                   test.add(Food.toMap(foodListItem));
                   fridgeRef.upsert({'food': FieldValue.arrayUnion(test)});
                   Navigator.pop(context);

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:einkaufsapp/services/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_iconpicker/flutter_iconpicker.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:einkaufsapp/shared/shared.dart';
 import 'package:flutter/material.dart';
@@ -83,7 +84,7 @@ class FridgeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FirebaseUser user = Provider.of<FirebaseUser>(context);
+    User user = Provider.of<User>(context);
     fridgeRef = Document<Fridge>(path: 'fridge', id: user.uid);
 
     return FutureBuilder(

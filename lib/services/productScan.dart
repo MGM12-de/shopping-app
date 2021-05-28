@@ -25,7 +25,7 @@ class Product {
   }
 
   static Future<Product> fetchProduct(Locale language, barcode) async {
-    String url;
+    Uri url;
     if (language.languageCode != null) {
       productDBUrl =
           productDBUrl.replaceAll('<language>', language.languageCode);
@@ -34,7 +34,7 @@ class Product {
     }
 
     print(productDBUrl);
-    url = '$productDBUrl/$barcode';
+    url = Uri.parse('$productDBUrl/$barcode');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {

@@ -8,7 +8,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FirebaseUser user = Provider.of<FirebaseUser>(context);
+    User user = Provider.of<User>(context);
 
     if (user != null) {
       return Scaffold(
@@ -20,7 +20,7 @@ class ProfileScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                if (user.photoUrl != null)
+                if (user.photoURL != null)
                   Container(
                     width: 100,
                     height: 100,
@@ -28,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                            image: NetworkImage(user.photoUrl))),
+                            image: NetworkImage(user.photoURL))),
                   ),
                 Text(user.email ?? '',
                     style: Theme.of(context).textTheme.headline6),

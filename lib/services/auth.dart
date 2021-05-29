@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
@@ -27,6 +28,8 @@ class AuthService {
       // return User
       return result;
     } on FirebaseAuthException catch (e) {
+      FirebaseCrashlytics.instance
+          .log('Google sign-in failed with code: ${e.code}');
       print('Failed with error code: ${e.code}');
       print(e.message);
       return null;

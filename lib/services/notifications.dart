@@ -1,11 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class Notifications {
   final FirebaseMessaging _messaging = FirebaseMessaging.instance;
 
   Notifications() {
     this.getPermission();
+    _messaging.subscribeToTopic("News");
     FirebaseMessaging.onMessage.listen((event) {
       this.getMessage(event);
     });

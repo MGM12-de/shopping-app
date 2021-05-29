@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
@@ -9,21 +10,30 @@ class AuthService {
   Stream<User> get user => _auth.authStateChanges();
 
   Future<UserCredential> signInWithGoogle() async {
-    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+    try {
+      final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
 
-    // obtain auth details
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
+      // obtain auth details
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
-    // create new credentials
-    final GoogleAuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
+      // create new credentials
+      final GoogleAuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
 
-    UserCredential result = await _auth.signInWithCredential(credential);
-    User user = result.user;
-    updateUserData(user);
-    // return User
-    return result;
+      UserCredential result = await _auth.signInWithCredential(credential);
+      User user = result.user;
+      updateUserData(user);
+
+      // return User
+      return result;
+    } on FirebaseAuthException catch (e) {
+      FirebaseCrashlytics.instance
+          .log('Google sign-in failed with code: ${e.code}');
+      print('Failed with error code: ${e.code}');
+      print(e.message);
+      return null;
+    }
   }
 
   /// Anonymous Firebase login

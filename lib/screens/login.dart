@@ -27,9 +27,7 @@ class LoginScreenState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            FlutterLogo(
-              size: 150,
-            ),
+            Image.asset('assets/images/icon.png'),
             Text(
               'Login to Start',
               style: Theme.of(context).textTheme.headline6,

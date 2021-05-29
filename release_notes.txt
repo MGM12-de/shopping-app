@@ -1,1 +1,2 @@
-you have no power here
+- changed start-up icon 
+- changed app icon

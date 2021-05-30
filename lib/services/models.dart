@@ -79,6 +79,12 @@ class ProductScore {
   final String nutri;
   final String eco;
 
+  factory ProductScore.fromJson(Map<String, dynamic> json) {
+    return ProductScore(
+        nutri: json['nutriscore_grade'] ?? 'unknown',
+        eco: json['ecoscore_grade'] ?? 'unknown');
+  }
+
   ProductScore({this.nutri, this.eco});
 }
 

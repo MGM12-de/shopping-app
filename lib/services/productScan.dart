@@ -32,9 +32,7 @@ class Product {
         brand: json['product']['brands'],
         pictureUrl: json['product']['image_url'] ?? '',
         ingredients: json['product']['ingredients_text'],
-        scores: new ProductScore(
-            nutri: json['product']['nutriscore_grade'] ?? 'unknown',
-            eco: json['product']['ecoscore_grade'] ?? 'unknown'),
+        scores: new ProductScore.fromJson(json['product']),
         nutriments: new Nutriments.fromJson(json['product']['nutriments']));
     return product;
   }

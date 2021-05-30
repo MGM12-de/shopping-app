@@ -6,14 +6,14 @@ import 'package:provider/provider.dart';
 import 'package:einkaufsapp/shared/shared.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class FridgeScreen extends StatelessWidget {
   Document<Fridge> fridgeRef;
   final foodInputController = TextEditingController();
   IconData _icon;
-  Food foodListItem;
-  bool isAdaptive = true;
-  bool showTooltips = false;
-  bool showSearch = true;
+  final bool isAdaptive = true;
+  final bool showTooltips = false;
+  final bool showSearch = true;
 
   createDialog(BuildContext context) {
     return showDialog(
@@ -48,7 +48,7 @@ class FridgeScreen extends StatelessWidget {
               TextButton(
                 child: Text("Save"),
                 onPressed: () {
-                  foodListItem = new Food(
+                  Food foodListItem = new Food(
                       name: foodInputController.text,
                       iconID: _icon.codePoint,
                       iconFontFamily: _icon.fontFamily,
@@ -78,6 +78,7 @@ class FridgeScreen extends StatelessWidget {
         searchHintText: 'Search icon...',
         noResultsText: 'No results for:');
     _icon = icon;
+    // ignore: invalid_use_of_protected_member
     (context as Element).reassemble(); // refresh screen
   }
 

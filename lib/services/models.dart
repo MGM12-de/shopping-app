@@ -74,3 +74,49 @@ class FridgeUser {
         isOwner: data['isOwner'] ?? false);
   }
 }
+
+class ProductScore {
+  final String nutri;
+  final String eco;
+
+  factory ProductScore.fromJson(Map<String, dynamic> json) {
+    return ProductScore(
+        nutri: json['nutriscore_grade'] ?? 'unknown',
+        eco: json['ecoscore_grade'] ?? 'unknown');
+  }
+
+  ProductScore({this.nutri, this.eco});
+}
+
+class Nutriments {
+  final num energy;
+  final num energyKcal;
+  final num fat;
+  final num saturedFat;
+  final num carbohydrates;
+  final num sugar;
+  final num proteins;
+  final num salt;
+
+  factory Nutriments.fromJson(Map<String, dynamic> json) {
+    return Nutriments(
+        energy: json['energy-kj_100g'],
+        energyKcal: json['energy-kcal_100g'],
+        fat: json['fat_100g'],
+        saturedFat: json['saturated-fat_100g'],
+        carbohydrates: json['carbohydrates_100g'],
+        proteins: json['proteins_100g'],
+        salt: json['salt_100g'],
+        sugar: json['sugars_100g']);
+  }
+
+  Nutriments(
+      {this.energy,
+      this.energyKcal,
+      this.fat,
+      this.saturedFat,
+      this.carbohydrates,
+      this.sugar,
+      this.proteins,
+      this.salt});
+}

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ProductScanScreen extends StatefulWidget {
   @override
@@ -47,7 +48,7 @@ class _ProductScanState extends State<ProductScanScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Scan"),
+        title: Text("Produkt Detail"),
       ),
       body: Center(
           child: FutureBuilder<Product>(
@@ -98,26 +99,86 @@ class ProductDetail extends StatelessWidget {
                         image: NetworkImage(product.pictureUrl))),
               ),
               title: Text(product.name ?? ""),
-              subtitle: Text(product.brand),
+              subtitle: Text(product.brand ?? ""),
             ),
-            Row(
-              children: [
-                Icon(FontAwesomeIcons.barcode),
-                Text(" "),
-                Text(product.barCode),
-              ],
+            Divider(),
+            ListTile(
+              leading: Icon(FontAwesomeIcons.barcode),
+              title: Text(product.barCode),
             ),
-            Row(
-              children: [
-                Text("Zutaten", style: Theme.of(context).textTheme.headline6),
-              ],
+            Divider(),
+            ListTile(
+              title: Text("Nutri-Score",
+                  style: Theme.of(context).textTheme.headline5),
+              trailing: SvgPicture.network(
+                'https://static.openfoodfacts.org/images/misc/nutriscore-${product.scores.nutri}.svg',
+                width: 50,
+                height: 50,
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Flexible(child: Text(product.ingredients ?? "")),
-              ],
+            Divider(),
+            ListTile(
+              title: Text("Eco-Score",
+                  style: Theme.of(context).textTheme.headline5),
+              trailing: SvgPicture.network(
+                'https://static.openfoodfacts.org/images/attributes/ecoscore-${product.scores.eco}.svg',
+                width: 50,
+                height: 50,
+              ),
             ),
+            Divider(),
+            ListTile(
+              title:
+                  Text("Zutaten", style: Theme.of(context).textTheme.headline6),
+            ),
+            Container(
+                margin: EdgeInsets.only(left: 20, right: 20),
+                child: Flexible(child: Text(product.ingredients ?? ""))),
+            Divider(),
+            ListTile(
+              title: Text("Nährwerte",
+                  style: Theme.of(context).textTheme.headline6),
+              subtitle: Text("je 100g"),
+            ),
+            Container(
+                margin: EdgeInsets.only(left: 25),
+                child: Table(
+                  border: TableBorder.symmetric(),
+                  defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                  children: <TableRow>[
+                    TableRow(children: <Widget>[
+                      Text("Energie"),
+                      Text(product.nutriments.energy.toString() +
+                          " kJ / " +
+                          product.nutriments.energyKcal.toString() +
+                          " kcal")
+                    ]),
+                    TableRow(children: <Widget>[
+                      Text("Fett"),
+                      Text(product.nutriments.fat.toString() + " g")
+                    ]),
+                    TableRow(children: <Widget>[
+                      Text("- davon gesättigte Fettsäuren"),
+                      Text(product.nutriments.saturedFat.toString() + " g")
+                    ]),
+                    TableRow(children: <Widget>[
+                      Text("Kohlenhydrate"),
+                      Text(product.nutriments.carbohydrates.toString() + " g")
+                    ]),
+                    TableRow(children: <Widget>[
+                      Text("- davon Zucker"),
+                      Text(product.nutriments.sugar.toString() + " g")
+                    ]),
+                    TableRow(children: <Widget>[
+                      Text("Eiweiß"),
+                      Text(product.nutriments.proteins.toString() + " g")
+                    ]),
+                    TableRow(children: <Widget>[
+                      Text("Salz"),
+                      Text(product.nutriments.salt.toString() + " g")
+                    ])
+                  ],
+                ))
           ],
         ),
       ),

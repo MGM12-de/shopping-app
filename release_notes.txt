@@ -1,2 +1,1 @@
-- changed start-up icon 
-- changed app icon
+- added nutriscore to productscanning

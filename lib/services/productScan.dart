@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:ui';
 
 import 'package:einkaufsapp/services/models.dart';

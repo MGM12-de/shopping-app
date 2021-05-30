@@ -74,3 +74,9 @@ class FridgeUser {
         isOwner: data['isOwner'] ?? false);
   }
 }
+
+class ProductScore {
+  final String nutri;
+
+  ProductScore({this.nutri});
+}

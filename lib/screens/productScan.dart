@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ProductScanScreen extends StatefulWidget {
   @override
@@ -47,7 +48,7 @@ class _ProductScanState extends State<ProductScanScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Scan"),
+        title: Text("Produkt Detail"),
       ),
       body: Center(
           child: FutureBuilder<Product>(
@@ -100,17 +101,23 @@ class ProductDetail extends StatelessWidget {
               title: Text(product.name ?? ""),
               subtitle: Text(product.brand),
             ),
-            Row(
-              children: [
-                Icon(FontAwesomeIcons.barcode),
-                Text(" "),
-                Text(product.barCode),
-              ],
+            Divider(),
+            ListTile(
+              leading: Icon(FontAwesomeIcons.barcode),
+              title: Text(product.barCode),
             ),
-            Row(
-              children: [
-                Text("Zutaten", style: Theme.of(context).textTheme.headline6),
-              ],
+            Divider(),
+            ListTile(
+                title: Text("Nutriscore",
+                    style: Theme.of(context).textTheme.headline5),
+                trailing: SvgPicture.network(
+                  'https://static.openfoodfacts.org/images/misc/nutriscore-${product.scores.nutri}.svg',
+                  fit: BoxFit.contain,
+                )),
+            Divider(),
+            ListTile(
+              title:
+                  Text("Zutaten", style: Theme.of(context).textTheme.headline6),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,

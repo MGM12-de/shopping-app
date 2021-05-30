@@ -14,6 +14,7 @@ class Product {
   final String pictureUrl;
   final String ingredients;
   final ProductScore scores;
+  final Nutriments nutriments;
 
   Product(
       {this.barCode,
@@ -21,7 +22,8 @@ class Product {
       this.brand,
       this.pictureUrl,
       this.ingredients,
-      this.scores});
+      this.scores,
+      this.nutriments});
 
   factory Product.fromJson(Map<String, dynamic> json) {
     Product product = Product(
@@ -32,7 +34,16 @@ class Product {
         ingredients: json['product']['ingredients_text'],
         scores: new ProductScore(
             nutri: json['product']['nutriscore_grade'] ?? 'unknown',
-            eco: json['product']['ecoscore_grade'] ?? 'unknown'));
+            eco: json['product']['ecoscore_grade'] ?? 'unknown'),
+        nutriments: new Nutriments(
+            energy: json['product']['nutriments']['energy-kj_100g'],
+            energyKcal: json['product']['nutriments']['energy-kcal_100g'],
+            fat: json['product']['nutriments']['fat_100g'],
+            saturedFat: json['product']['nutriments']['saturated-fat_100g'],
+            carbohydrates: json['product']['nutriments']['carbohydrates_100g'],
+            proteins: json['product']['nutriments']['proteins_100g'],
+            salt: json['product']['nutriments']['salt_100g'],
+            sugar: json['product']['nutriments']['sugars_100g']));
     return product;
   }
 

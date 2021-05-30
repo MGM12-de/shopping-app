@@ -81,3 +81,24 @@ class ProductScore {
 
   ProductScore({this.nutri, this.eco});
 }
+
+class Nutriments {
+  final num energy;
+  final num energyKcal;
+  final num fat;
+  final num saturedFat;
+  final num carbohydrates;
+  final num sugar;
+  final num proteins;
+  final num salt;
+
+  Nutriments(
+      {this.energy,
+      this.energyKcal,
+      this.fat,
+      this.saturedFat,
+      this.carbohydrates,
+      this.sugar,
+      this.proteins,
+      this.salt});
+}

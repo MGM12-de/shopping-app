@@ -24,13 +24,16 @@ class Product {
       this.scores});
 
   factory Product.fromJson(Map<String, dynamic> json) {
-    return Product(
+    Product product = Product(
         barCode: json['code'],
         name: json['product']['product_name'],
         brand: json['product']['brands'],
-        pictureUrl: json['product']['image_url'] ?? "",
+        pictureUrl: json['product']['image_url'] ?? '',
         ingredients: json['product']['ingredients_text'],
-        scores: new ProductScore(nutri: json['product']['nutriscore_grade']));
+        scores: new ProductScore(
+            nutri: json['product']['nutriscore_grade'] ?? 'unknown',
+            eco: json['product']['ecoscore_grade'] ?? 'unknown'));
+    return product;
   }
 
   static Future<Product> fetchProduct(Locale language, barcode) async {

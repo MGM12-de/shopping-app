@@ -99,7 +99,7 @@ class ProductDetail extends StatelessWidget {
                         image: NetworkImage(product.pictureUrl))),
               ),
               title: Text(product.name ?? ""),
-              subtitle: Text(product.brand),
+              subtitle: Text(product.brand ?? ""),
             ),
             Divider(),
             ListTile(
@@ -108,12 +108,24 @@ class ProductDetail extends StatelessWidget {
             ),
             Divider(),
             ListTile(
-                title: Text("Nutriscore",
-                    style: Theme.of(context).textTheme.headline5),
-                trailing: SvgPicture.network(
-                  'https://static.openfoodfacts.org/images/misc/nutriscore-${product.scores.nutri}.svg',
-                  fit: BoxFit.contain,
-                )),
+              title: Text("Nutri-Score",
+                  style: Theme.of(context).textTheme.headline5),
+              trailing: SvgPicture.network(
+                'https://static.openfoodfacts.org/images/misc/nutriscore-${product.scores.nutri}.svg',
+                width: 50,
+                height: 50,
+              ),
+            ),
+            Divider(),
+            ListTile(
+              title: Text("Eco-Score",
+                  style: Theme.of(context).textTheme.headline5),
+              trailing: SvgPicture.network(
+                'https://static.openfoodfacts.org/images/attributes/ecoscore-${product.scores.eco}.svg',
+                width: 50,
+                height: 50,
+              ),
+            ),
             Divider(),
             ListTile(
               title:

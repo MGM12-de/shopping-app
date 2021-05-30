@@ -77,6 +77,7 @@ class FridgeUser {
 
 class ProductScore {
   final String nutri;
+  final String eco;
 
-  ProductScore({this.nutri});
+  ProductScore({this.nutri, this.eco});
 }

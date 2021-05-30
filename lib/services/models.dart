@@ -92,6 +92,18 @@ class Nutriments {
   final num proteins;
   final num salt;
 
+  factory Nutriments.fromJson(Map<String, dynamic> json) {
+    return Nutriments(
+        energy: json['energy-kj_100g'],
+        energyKcal: json['energy-kcal_100g'],
+        fat: json['fat_100g'],
+        saturedFat: json['saturated-fat_100g'],
+        carbohydrates: json['carbohydrates_100g'],
+        proteins: json['proteins_100g'],
+        salt: json['salt_100g'],
+        sugar: json['sugars_100g']);
+  }
+
   Nutriments(
       {this.energy,
       this.energyKcal,

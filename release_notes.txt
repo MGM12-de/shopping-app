@@ -1,1 +1,3 @@
 - added nutriscore to productscanning
+- added ecoscore to productscanning
+- added nutriments to productscanning

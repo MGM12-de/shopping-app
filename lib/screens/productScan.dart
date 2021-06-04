@@ -1,4 +1,5 @@
 import 'package:einkaufsapp/services/services.dart';
+import 'package:einkaufsapp/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -140,62 +141,10 @@ class ProductDetail extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline6),
               subtitle: Text("je 100g"),
             ),
-            Ingredients(product: product)
+            NutrimentWidget(nutriments: product.nutriments)
           ],
         ),
       ),
     );
-  }
-}
-
-class Ingredients extends StatelessWidget {
-  const Ingredients({
-    Key key,
-    @required this.product,
-  }) : super(key: key);
-
-  final Product product;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        margin: EdgeInsets.only(left: 25),
-        child: Table(
-          border: TableBorder.symmetric(),
-          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-          children: <TableRow>[
-            TableRow(children: <Widget>[
-              Text("Energie"),
-              Text(product.nutriments.energy.toString() +
-                  " kJ / " +
-                  product.nutriments.energyKcal.toString() +
-                  " kcal")
-            ]),
-            TableRow(children: <Widget>[
-              Text("Fett"),
-              Text(product.nutriments.fat.toString() + " g")
-            ]),
-            TableRow(children: <Widget>[
-              Text("- davon gesättigte Fettsäuren"),
-              Text(product.nutriments.saturedFat.toString() + " g")
-            ]),
-            TableRow(children: <Widget>[
-              Text("Kohlenhydrate"),
-              Text(product.nutriments.carbohydrates.toString() + " g")
-            ]),
-            TableRow(children: <Widget>[
-              Text("- davon Zucker"),
-              Text(product.nutriments.sugar.toString() + " g")
-            ]),
-            TableRow(children: <Widget>[
-              Text("Eiweiß"),
-              Text(product.nutriments.proteins.toString() + " g")
-            ]),
-            TableRow(children: <Widget>[
-              Text("Salz"),
-              Text(product.nutriments.salt.toString() + " g")
-            ])
-          ],
-        ));
   }
 }

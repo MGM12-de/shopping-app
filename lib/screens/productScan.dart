@@ -55,6 +55,12 @@ class _ProductScanState extends State<ProductScanScreen> {
           child: FutureBuilder<Product>(
               future: futureProduct,
               builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  isLoading = true;
+                } else {
+                  isLoading = false;
+                }
+
                 if (snapshot.hasData) {
                   return ProductDetail(product: snapshot.data);
                 } else if (snapshot.hasError) {

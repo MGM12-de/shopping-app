@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:ui';
-
-import 'package:einkaufsapp/services/models.dart';
+import 'package:einkaufsapp/models/models.dart';
 import 'package:http/http.dart' as http;
 
 class Product {

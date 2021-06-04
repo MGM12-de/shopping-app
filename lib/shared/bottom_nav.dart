@@ -37,7 +37,7 @@ class AppBottomNav extends StatelessWidget {
             // do nuttin
             break;
           case 1:
-            // Navigator.pushNamed(context, '/about');
+            Navigator.pushNamed(context, '/shoppingList');
             break;
           case 2:
             Navigator.pushNamed(context, '/productScan');

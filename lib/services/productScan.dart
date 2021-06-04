@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:ui';
 import 'package:einkaufsapp/models/models.dart';
+import 'package:firebase_performance/firebase_performance.dart';
 import 'package:http/http.dart' as http;
 
 class Product {
@@ -43,19 +44,30 @@ class Product {
     } else {
       productDBUrl = productDBUrl.replaceAll('<language>', "de");
     }
-
-    print(productDBUrl);
     url = Uri.parse('$productDBUrl/$barcode');
-    final response = await http.get(url);
+    final HttpMetric metric = FirebasePerformance.instance
+        .newHttpMetric(url.toString(), HttpMethod.Get);
+    await metric.start();
 
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      return Product.fromJson(jsonDecode(response.body));
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to load product');
+    try {
+      final response = await http.get(url);
+
+      metric
+        ..responsePayloadSize = response.contentLength
+        ..responseContentType = response.headers['Content-Type']
+        ..httpResponseCode = response.statusCode;
+
+      if (response.statusCode == 200) {
+        // If the server did return a 200 OK response,
+        // then parse the JSON.
+        return Product.fromJson(jsonDecode(response.body));
+      } else {
+        // If the server did not return a 200 OK response,
+        // then throw an exception.
+        throw Exception('Failed to load product');
+      }
+    } finally {
+      await metric.stop();
     }
   }
 }

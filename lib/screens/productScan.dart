@@ -138,9 +138,7 @@ class ProductDetail extends StatelessWidget {
               title:
                   Text("Zutaten", style: Theme.of(context).textTheme.headline6),
             ),
-            Container(
-                margin: EdgeInsets.only(left: 20, right: 20),
-                child: Flexible(child: Text(product.ingredients ?? ""))),
+            Flexible(child: Text(product.ingredients ?? "")),
             Divider(),
             ListTile(
               title: Text("Nährwerte",
